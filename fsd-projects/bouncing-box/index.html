@@ -69,7 +69,9 @@
         //////////////////////////////////////////////////////////////////
 
         // TODO 2 - Variable declarations
-
+        let positionX = 5;
+        let points=0
+        let speed=10
 
 
 
@@ -80,7 +82,16 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
-
+        positionX = positionX + speed; // Adds 10 to variableName
+        moveBoxTo(positionX); // Moves box to right edge
+        if (positionX > boardWidth) {
+      speed = speed * -1
+          // Code to reverse speed goes here
+}
+        if (positionX < 0) {
+          speed=speed * -1
+  // Code to reverse speed goes here
+}
         
 
           
@@ -93,13 +104,17 @@
          * - increase the speed
          * - move the box to the left side of the screen.
          */
+        
         function handleBoxClick() {
-
+        positionX=0
+        points=points+1 
+        changeBoxText(points);
+        speed = 3 * points + 10
 
 
 
         }
-
+        
 
         
       })();

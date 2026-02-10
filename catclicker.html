@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Cat Clicker</title>
+  <style>
+    img {
+      width: 650px;
+      height: 400px;
+      position: relative;
+      top: 300px;
+      left: 150px;
+      border: 5px solid pink;
+    }
+
+    h1 {
+      position: relative;
+      top: -500px;
+      left: 150px;
+      color: pink;
+      font-size: 194px;
+    }
+
+    h2 {
+      position: relative;
+      top: -150px;
+      left: 150px;
+      color: pink;
+      font-size: 194px;
+    }
+
+    h3 {
+      position: relative;
+      top: -800px;
+      left: 150px;
+      color: pink;
+      font-size: 194px;
+    }
+
+    body {
+      background-color: black;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <img id="cat"
+    src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_16x9.jpg?w=1200">
+  <h1 id="score">Score=0</h1>
+  <h2 id="gain">Gain=1</h2>
+  <h2 id="upgradeCost">Upgrade Cost=25</h2>
+  <img id="upgrade"
+    src="https://i0.wp.com/customeasybutton.com/wp-content/uploads/2019/12/1-CEB-surprise-sequencer.png?fit=1821%2C1650&ssl=1">
+  <img id="autoClickerUpgrade"
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvJ9SyfkVP0DIUFutJ6QFv_RsqJ40ytvvgHQ&s">
+  <h3 id="autoClickerUpgradeCost">Autoclicker Upgrade Cost=25</h3>
+
+
+</body>
+
+</html>
+<script>
+  //when you click the img tag, score=score+1 and you can see it\\
+  let score = 0
+  let gain = 1
+  let upgradeChange = 1
+  let autoClickerChange = 1
+  let autoClicker = 0
+  setInterval(autoClickerRun, 1);
+  setInterval(updateScore, 16)
+
+  document.getElementById("cat").addEventListener("click", scoreGoUp)
+  function scoreGoUp() {
+    score = score + gain
+    
+  }
+  document.getElementById("upgrade").addEventListener("click", gainGoUp)
+  function gainGoUp() {
+    if (score >= 25 * gain * 1.2 - 5) {
+      score = score - 25 * gain * 1.2 + 5
+      gain = gain + 1
+      document.getElementById("gain").innerText = "Gain=" + gain
+      
+      document.getElementById("upgradeCost").innerText = "Upgrade Cost=" + (25 * gain * 1.2 - 5)
+    }
+  }
+  document.getElementById("autoClickerUpgrade").addEventListener("click", autoClickerGoUp)
+  function autoClickerGoUp() {
+    if (score >= 25 * (autoClickerChange) * 1.2 - 5) {
+      score = score - 25 * (autoClickerChange) * 1.2 + 5
+      autoClickerChange = autoClickerChange + 1
+      autoClicker = autoClicker + 0.0001
+      
+      document.getElementById("autoClickerUpgradeCost").innerText = "Autoclicker Upgrade Cost=" + (25 * (autoClickerChange) * 1.2 - 5)
+
+    }
+  }
+
+function autoClickerRun()
+{
+  score=score+autoClicker
+}
+
+function updateScore(){
+  document.getElementById("score").innerText = "Score=" + score.toFixed(1)
+
+}
+
+  //todo:clicker, display score\\
+</script>

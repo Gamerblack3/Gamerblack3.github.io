@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Bouncing Cat</title>
+    <style></style>
+  </head>
+  <body>
+    <h1 id="boxXDisplay">Cat's X = 200</h1>
+    <h1 id="boxYDisplay">Cat's Y = 200</h1>
+    <canvas id="canvas" height="8000" width="9000"></canvas>
+  </body>
+</html>
+<script>
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext("2d");
+
+  //how the box moves//
+  setInterval(boxMoves, 1);
+
+  //box's starting position//
+  let boxX = 200;
+  let boxY = 200;
+  //box's movement (starts up and right)//
+  let boxChangeX = 1;
+  let boxChangeY = 1;
+  //wall's positions//
+  //left wall//
+  let wall1X = 40;
+  let wall1Y = 10;
+  //top wall//
+  let wall2X = 10;
+  let wall2Y = 10;
+  //right wall//
+  let wall3X = 400;
+  let wall3Y = 10;
+  //bottom wall//
+  let wall4X = 10;
+  let wall4Y = 400;
+  function boxMoves() {
+    ctx.clearRect(0, 0, 2000, 2000);
+    ctx.fillRect(wall1X - 5, wall1Y - +5, 5, 436);
+    ctx.fillRect(wall2X - 1, wall2Y - 5, 431, 5);
+    ctx.fillRect(wall3X + 40, wall3Y - 5, 5, 436);
+    ctx.fillRect(wall4X - 5, wall4Y + 40, 440, 5);
+    wallChecks();
+    boxX = boxX + boxChangeX;
+    boxX = boxX + boxChangeX;
+    boxX = boxX + boxChangeX;
+    boxY = boxY + boxChangeY;
+    boxY = boxY + boxChangeY;
+    document.getElementById("boxXDisplay").innerText = "Cat's X =" + boxX;
+    document.getElementById("boxYDisplay").innerText = "Cat's Y =" + boxY;
+    ctx.fillRect(boxX, boxY, 40, 40);
+  }
+  //how the box bounces
+  function wallChecks() {
+    if (boxX > wall3X) {
+      boxChangeX = -boxChangeX;
+    }
+    if (boxX < wall1X) {
+      boxChangeX = -boxChangeX;
+    }
+    if (boxY < wall2Y) {
+      boxChangeY = -boxChangeY;
+    }
+    if (boxY > wall4Y) {
+      boxChangeY = -boxChangeY;
+    }
+  }
+</script>
